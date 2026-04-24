@@ -24,6 +24,10 @@ class PluginContext {
 		return plugin_dir_url( $this->plugin_file );
 	}
 
+	public function assetUrl( string $relative_path ): string {
+		return $this->pluginUrl() . ltrim( $relative_path, '/' );
+	}
+
 	public function version(): string {
 		return $this->version;
 	}

@@ -86,6 +86,39 @@ class CoreApi {
 		);
 	}
 
+	public static function getArtistDisplayName( int $artist_id ): string {
+		$studio_name = trim( (string) get_post_meta( $artist_id, 'mw_artist_studio_name', true ) );
+		if ( '' !== $studio_name ) {
+			return $studio_name;
+		}
+
+		$first_name = trim( (string) get_post_meta( $artist_id, 'mw_artist_first_name', true ) );
+		$last_name  = trim( (string) get_post_meta( $artist_id, 'mw_artist_last_name', true ) );
+		$full_name  = trim( $first_name . ' ' . $last_name );
+
+		if ( '' !== $full_name ) {
+			return $full_name;
+		}
+
+		return get_the_title( $artist_id );
+	}
+
+	public static function getArtistSortName( int $artist_id ): string {
+		$last_name = trim( (string) get_post_meta( $artist_id, 'mw_artist_last_name', true ) );
+		if ( '' !== $last_name ) {
+			return $last_name;
+		}
+
+		return self::getArtistDisplayName( $artist_id );
+	}
+
+	public static function getArtistSortInitial( int $artist_id ): string {
+		$sort_name = remove_accents( self::getArtistSortName( $artist_id ) );
+		$initial   = strtoupper( substr( trim( $sort_name ), 0, 1 ) );
+
+		return preg_match( '/[A-Z]/', $initial ) ? $initial : '#';
+	}
+
 	public static function sanitizeIdList( $value ): array {
 		if ( ! is_array( $value ) ) {
 			return array();
