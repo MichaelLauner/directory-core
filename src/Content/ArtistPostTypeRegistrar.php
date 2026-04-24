@@ -39,7 +39,10 @@ class ArtistPostTypeRegistrar implements Service {
 				),
 				'public'             => true,
 				'has_archive'        => true,
-				'rewrite'            => array( 'slug' => 'artists' ),
+				'rewrite'            => array(
+					'slug'       => 'artists',
+					'with_front' => false,
+				),
 				'show_in_rest'       => true,
 				'show_in_menu'       => CoreApi::adminMenuSlug(),
 				'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
