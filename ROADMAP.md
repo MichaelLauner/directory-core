@@ -70,6 +70,8 @@ Status: Planned.
 
 Use Gravity Forms as the first submission layer because staff are comfortable managing forms there. The first implementation should be configuration-first: use Gravity Forms feeds and standard WordPress/Gravity Forms behavior wherever possible before adding plugin integration code.
 
+Directory Core includes a Gravity Forms Intake helper under Creative Directory that provides a starter artist intake form export, checks whether Gravity Forms and Advanced Post Creation are active, and documents the recommended feed mapping.
+
 Target capabilities:
 
 - Public artist self-submission form.
@@ -78,6 +80,27 @@ Target capabilities:
 - Staff can review submissions before anything becomes publicly visible.
 
 Plugin code should only be added when Gravity Forms configuration is not enough for reliable mapping, validation, approval workflow, or staff usability.
+
+### Deployment Readiness: Artist Intake Launch
+
+Status: Next.
+
+Before giving the client a live artist intake link, complete a small launch-readiness pass so submissions are reviewable, private by default, and staff knows where to look.
+
+Recommended order:
+
+- Install and activate Gravity Forms Advanced Post Creation on the client or staging site.
+- Import the starter artist intake form from Creative Directory > Settings > Gravity Forms Intake.
+- Configure the Advanced Post Creation feed to create `mw_artist` records with `post_status` set to `pending`.
+- Map the feed so submitted artist name becomes the post title, biography becomes post content, contact fields map to Directory Core meta, and supported taxonomy fields map to media/discovery taxonomies.
+- Default new submissions to `mw_visibility_state = internal` and `mw_artist_submission_source = gravity_forms`.
+- Submit two or three test entries and confirm staff can review the pending artist records before anything becomes public.
+- Confirm the staff review workflow: pending artist -> staff review/edit -> visibility changed to `directory` or `profile` only when approved.
+- Add clear intake form language covering no guarantee of listing, staff review/curation, and which contact information may become public.
+- Have the client review the taxonomy choices for media, services, audiences/settings, project scale, availability, and service area before public submissions begin.
+- Soft launch the form on an unlinked/private page first, then verify public directory listing, profile display, contact fields, images, and filters after approval.
+- Add a staff dashboard widget soon after launch to surface pending artist submissions and recent intake activity.
+- Commit and tag the deploy state before packaging or installing on the client site.
 
 ### Phase 3: Staff Approval Dashboard
 
@@ -164,6 +187,7 @@ Implementation note: the data fields and taxonomies for these richer filters can
 
 - The living roadmap lives in Directory Core because submissions, ownership, approval, roles, and shared records are cross-product concerns.
 - Gravity Forms is the preferred initial intake layer, using a configuration-first approach.
+- Initial intake launch should use Gravity Forms Advanced Post Creation to create pending, internal artist records for staff review.
 - The target ownership model is multiple owner users per artist or venue record.
 - Artist-managed edits should use staged changes that require staff approval before affecting live public records.
 - Public presentation remains the responsibility of the Artist Directory plugin unless the behavior becomes shared by future directory products.

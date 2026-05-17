@@ -3,6 +3,8 @@ namespace DirectoryCore;
 
 use DirectoryCore\Admin\AdminColumns;
 use DirectoryCore\Admin\AdminMenu;
+use DirectoryCore\Admin\GravityFormsIntakeHelper;
+use DirectoryCore\Admin\SettingsHub;
 use DirectoryCore\Content\ArtistDiscoveryTaxonomies;
 use DirectoryCore\Content\ArtistPostTypeRegistrar;
 use DirectoryCore\Content\MediaTaxonomy;
@@ -52,6 +54,7 @@ class Plugin {
 	private function buildServices(): void {
 		$this->services = array(
 			AdminMenu::class          => new AdminMenu( $this->context ),
+			SettingsHub::class        => new SettingsHub( $this->context ),
 			ArtistPostTypeRegistrar::class => new ArtistPostTypeRegistrar( $this->context ),
 			VenuePostTypeRegistrar::class  => new VenuePostTypeRegistrar( $this->context ),
 			MediaTaxonomy::class      => new MediaTaxonomy( $this->context ),
@@ -59,6 +62,7 @@ class Plugin {
 			ArtistMetaManager::class  => new ArtistMetaManager( $this->context ),
 			VenueMetaManager::class   => new VenueMetaManager( $this->context ),
 			AdminColumns::class       => new AdminColumns( $this->context ),
+			GravityFormsIntakeHelper::class => new GravityFormsIntakeHelper( $this->context ),
 		);
 	}
 
