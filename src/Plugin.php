@@ -3,6 +3,7 @@ namespace DirectoryCore;
 
 use DirectoryCore\Admin\AdminColumns;
 use DirectoryCore\Admin\AdminMenu;
+use DirectoryCore\Content\ArtistDiscoveryTaxonomies;
 use DirectoryCore\Content\ArtistPostTypeRegistrar;
 use DirectoryCore\Content\MediaTaxonomy;
 use DirectoryCore\Content\VenuePostTypeRegistrar;
@@ -37,10 +38,13 @@ class Plugin {
 		$artist_registrar = new ArtistPostTypeRegistrar( $context );
 		$venue_registrar  = new VenuePostTypeRegistrar( $context );
 		$media_taxonomy   = new MediaTaxonomy( $context );
+		$artist_taxonomies = new ArtistDiscoveryTaxonomies( $context );
 
 		$artist_registrar->registerPostType();
 		$venue_registrar->registerPostType();
 		$media_taxonomy->registerTaxonomy();
+		$artist_taxonomies->registerTaxonomies();
+		$artist_taxonomies->seedDefaultTerms();
 
 		flush_rewrite_rules();
 	}
@@ -51,6 +55,7 @@ class Plugin {
 			ArtistPostTypeRegistrar::class => new ArtistPostTypeRegistrar( $this->context ),
 			VenuePostTypeRegistrar::class  => new VenuePostTypeRegistrar( $this->context ),
 			MediaTaxonomy::class      => new MediaTaxonomy( $this->context ),
+			ArtistDiscoveryTaxonomies::class => new ArtistDiscoveryTaxonomies( $this->context ),
 			ArtistMetaManager::class  => new ArtistMetaManager( $this->context ),
 			VenueMetaManager::class   => new VenueMetaManager( $this->context ),
 			AdminColumns::class       => new AdminColumns( $this->context ),

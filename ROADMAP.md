@@ -24,7 +24,15 @@ Directory Core currently owns the shared record model and administrative foundat
 - Visibility states for internal records, public directory listings, and public profile pages.
 - Related artist/venue relationships.
 - Profile artwork gallery metadata.
+- Public contact/link metadata, including contact preference, inquiry email, website, social URL, primary contact, and inquiry availability.
+- Internal referral metadata, including vetted/recommended state, last reviewed date, submission source, referral notes, staff notes, and do-not-refer notes.
 - `mw_owner_user_id` as an early placeholder for account ownership.
+- Additional artist discovery taxonomies:
+  - `mw_artist_service` for services and opportunities such as murals, commissions, teaching, workshops, and public art.
+  - `mw_artist_audience` for audiences and settings such as schools, families, corporate, festivals, and public spaces.
+  - `mw_artist_project_scale` for small commissions, large murals, public installations, temporary works, and permanent works.
+  - `mw_artist_availability` for accepting commissions, teaching availability, public art availability, and related status terms.
+  - `mw_artist_service_area` for location and travel/service coverage.
 
 The Artist Directory plugin currently owns the public-facing directory experience:
 
@@ -53,6 +61,8 @@ Key capabilities:
 - Directory-only listings that do not expose public profile pages.
 - Internal records omitted from the public directory.
 - Configurable directory page used by public links.
+- Staff-editable contact, referral, and discovery fields on artist records.
+- Staff-editable discovery taxonomies for services, audiences/settings, project scale, availability, and service area.
 
 ### Phase 2: Gravity Forms Intake
 
@@ -127,6 +137,8 @@ Potential capabilities:
 - Richer filters for use cases such as mural artists, teaching artists, commissions, availability, or location.
 - Better public profile fields for specialties, website/social links, and contact preferences.
 - Internal staff notes that help with referrals but are never shown publicly.
+
+Implementation note: the data fields and taxonomies for these richer filters can exist before they are exposed on the public directory. Public filtering and profile display should be added intentionally after staff confirms which terms and contact fields are safe to expose.
 
 ## Architecture Recommendations
 

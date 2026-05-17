@@ -41,11 +41,20 @@
 	color: #1d2327;
 }
 
+.mw-directory-admin__field input[type="date"],
+.mw-directory-admin__field input[type="email"],
 .mw-directory-admin__field input[type="text"],
+.mw-directory-admin__field input[type="url"],
+.mw-directory-admin__field textarea,
 .mw-directory-admin__field select {
 	width: 100%;
 	max-width: none;
 	border-radius: 6px;
+}
+
+.mw-directory-admin__field textarea {
+	min-height: 92px;
+	resize: vertical;
 }
 
 .mw-directory-admin__field select[multiple] {
